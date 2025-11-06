@@ -1,20 +1,17 @@
 package org.example;
 
+import org.example.ui.MenuView;
+import org.example.ui.SceneManager;
+
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class TankWar extends Application {
 
     @Override
     public void start(Stage stage){
-        Label intro = new Label("Hello friends!");
-        Scene scene = new Scene(intro, 300, 300);
-        stage.setScene(scene);
-
-        stage.setTitle("Tank War");
-        stage.show();
+        SceneManager.init(stage);
+        SceneManager.switchSceneTo(MenuView.getScene());
     }
 
     public static  void main(String[] args){
