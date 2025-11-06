@@ -1,5 +1,7 @@
 package org.example.ui;
 
+import org.example.blueprints.Constants;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -14,6 +16,6 @@ public class MenuView {
 
         VBox layout = new VBox(20, playBtn, exitBtn);
         layout.setStyle("-fx-alignment: center; -fx-background-color: #222;");
-        return new Scene(layout, 800, 600);
+        return new Scene(layout, Constants.GAME_WIDTH.getValue(), Constants.GAME_HEIGHT.getValue());
     }
 }

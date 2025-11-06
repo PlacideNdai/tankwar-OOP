@@ -1,5 +1,6 @@
 package org.example.ui;
 
+import org.example.blueprints.Constants;
 import org.example.game.GameController;
 import org.example.game.GameLoop;
 
@@ -12,7 +13,7 @@ import javafx.scene.layout.StackPane;
 public class GameView {
     public static Scene getScene(){
         // settings up canvas.
-        Canvas canvas = new Canvas(800, 600);
+        Canvas canvas = new Canvas(Constants.GAME_WIDTH.getValue(), Constants.GAME_HEIGHT.getValue());
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
         StackPane root = new StackPane(canvas);

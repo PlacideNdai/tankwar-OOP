@@ -1,5 +1,6 @@
 package org.example.ui;
 
+import org.example.blueprints.Constants;
 import org.example.game.GameLoop;
 
 import javafx.scene.Scene;
@@ -28,6 +29,6 @@ public class PauseMenu {
 
         VBox layout = new VBox(20, resumeBtn, menuBtn, exitBtn);
         layout.setStyle("-fx-alignment: center; -fx-background-color: #222;");
-        return new Scene(layout);
+        return new Scene(layout, Constants.GAME_WIDTH.getValue(), Constants.GAME_HEIGHT.getValue());
     }
 }
