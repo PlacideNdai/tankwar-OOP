@@ -27,9 +27,7 @@ public class GameView {
         scene.setOnKeyPressed(e -> {
             if(e.getCode() == KeyCode.ESCAPE){
                 gameloop.stop();
-
-                // change this to pause menu when it's ready.
-                SceneManager.switchSceneTo(MenuView.getScene());
+                SceneManager.switchSceneTo(PauseMenu.getScene(gameloop));
             }
         });
 
