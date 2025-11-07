@@ -3,7 +3,7 @@ package org.example.input;
 import javafx.scene.Scene;
 
 public class InputHandler {
-    private boolean up, down, left, right;
+    private boolean up, down, left, right, shoot;
 
     public void attach(Scene scene) {
         scene.setOnKeyPressed(e -> {
@@ -12,6 +12,8 @@ public class InputHandler {
                 case S -> down = true;
                 case A -> left = true;
                 case D -> right = true;
+                case SPACE -> shoot = true;
+                default -> {}
             }
         });
 
@@ -21,6 +23,8 @@ public class InputHandler {
                 case S -> down = false;
                 case A -> left = false;
                 case D -> right = false;
+                case SPACE -> shoot = false;
+                default -> {}
             }
         });
     }
@@ -39,5 +43,9 @@ public class InputHandler {
 
     public boolean isRight() {
         return right;
+    }
+
+    public boolean isShoot() {
+        return shoot;
     }
 }

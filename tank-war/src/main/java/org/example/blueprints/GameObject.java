@@ -28,4 +28,12 @@ public abstract class GameObject {
     public double getHeight(){
         return height;
     }
+
+    public double getX(){
+        return x;
+    }
+
+    public double getY(){
+        return y;
+    }
 }

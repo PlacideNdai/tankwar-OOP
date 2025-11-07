@@ -11,13 +11,15 @@ public class Tank extends GameObject {
     private Image upImage, downImage, leftImage, rightImage;
     private double health;
     private double maxHealth;
-
+    private double prevX, prevY;
 
     public Tank(double x, double y) {
         this.x = x;
         this.y = y;
+
         this.width = Constants.TANK_WIDTH.getIntValue();
         this.height = Constants.TANK_HEIGHT.getIntValue();
+
         this.health = 100;
         this.maxHealth = 100;
 
@@ -54,24 +56,43 @@ public class Tank extends GameObject {
     // movement.
     // ---------------------------------------
     public void move(double dx, double dy) {
+        prevX = x;
+        prevY = y;
+
         x += dx;
         y += dy;
     }
 
     public void rotate(String direction) {
-        if(direction.equals(Constants.WEST.getStringValue())) {
+        if (direction.equals(Constants.WEST.getStringValue())) {
             tankImage = leftImage;
-        } else if(direction.equals(Constants.SOUTH.getStringValue())) {
+        } else if (direction.equals(Constants.SOUTH.getStringValue())) {
             tankImage = downImage;
-        } else if(direction.equals(Constants.EAST.getStringValue())) {
+        } else if (direction.equals(Constants.EAST.getStringValue())) {
             tankImage = rightImage;
-        } else if(direction.equals(Constants.NORTH.getStringValue())) {
+        } else if (direction.equals(Constants.NORTH.getStringValue())) {
             tankImage = upImage;
         }
     }
 
+    public void undoMove() {
+        x = prevX;
+        y = prevY;
+    }
+
+    // ---------------------------------------
+    // Collision detection.
+    // ---------------------------------------
+    public boolean collidesWith(GameObject gameObject) {
+        return (x < gameObject.getX() + gameObject.getWidth() &&
+                x + width > gameObject.getX() &&
+                y < gameObject.getY() + gameObject.getHeight() &&
+                y + height > gameObject.getY());
+    }
+
     @Override
-    public void update(double deltaTime) {}
+    public void update(double deltaTime) {
+    }
 
     @Override
     public void render(GraphicsContext graphicsContext) {

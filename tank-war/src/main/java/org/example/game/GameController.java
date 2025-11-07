@@ -55,6 +55,9 @@ public class GameController {
             }
         }
 
+        // check for collisions.
+        checkCollisions();
+
         for (GameObject obj : objectsInGame) {
             obj.update(deltaTime);
         }
@@ -80,5 +83,20 @@ public class GameController {
 
     public void addObject(GameObject obj) {
         objectsInGame.add(obj);
+    }
+
+    // ----------------------------------------------
+    // Collision detection.
+    // ----------------------------------------------
+
+    public void checkCollisions() {
+        for (GameObject obj : objectsInGame) {
+            if (obj instanceof Wall wall) {
+                if (player.collidesWith(wall)) {
+                    System.out.println("Collision detected!");
+                    player.undoMove();
+                }
+            }
+        }
     }
 }
