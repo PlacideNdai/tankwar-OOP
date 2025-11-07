@@ -3,6 +3,7 @@ package org.example.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.example.blueprints.Constants;
 import org.example.blueprints.GameObject;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -22,7 +23,7 @@ public class GameController {
     }
 
     public void render(){
-        graphicsContext.clearRect(0, 0, 800, 600);
+        graphicsContext.clearRect(0, 0, Constants.GAME_WIDTH.getValue(), Constants.GAME_HEIGHT.getValue());
 
         for(GameObject obj : objectsInGame){
             obj.render(graphicsContext);

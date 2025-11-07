@@ -31,7 +31,6 @@ public class GameView {
                 SceneManager.switchSceneTo(PauseMenu.getScene(gameloop));
             }
         });
-
         return scene;
     }
 }
