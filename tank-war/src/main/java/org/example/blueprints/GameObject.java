@@ -15,4 +15,17 @@ public abstract class GameObject {
     public Bounds getBounds(){
         return sprite.getBoundsInParent();
     }
+
+    public void setPosition(double x, double y){
+        this.x = x;
+        this.y = y;
+    }
+
+    public double getWidth(){
+        return width;
+    }
+
+    public double getHeight(){
+        return height;
+    }
 }
