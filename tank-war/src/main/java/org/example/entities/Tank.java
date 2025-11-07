@@ -1,5 +1,6 @@
 package org.example.entities;
 
+import org.example.blueprints.Constants;
 import org.example.blueprints.GameObject;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -8,10 +9,19 @@ import javafx.scene.image.Image;
 public class Tank extends GameObject {
     private Image tankImage;
     private Image upImage, downImage, leftImage, rightImage;
+    private double health;
+    private double maxHealth;
+
 
     public Tank(double x, double y) {
         this.x = x;
         this.y = y;
+        this.health = 100;
+        this.maxHealth = 100;
+
+        // --------------------------------------------------------------------------------------------
+        // Tank Images
+        // --------------------------------------------------------------------------------------------
         this.tankImage = new Image(getClass().getResource("/images/tankU.gif").toExternalForm());
         this.upImage = new Image(getClass().getResource("/images/tankU.gif").toExternalForm());
         this.downImage = new Image(getClass().getResource("/images/tankD.gif").toExternalForm());
@@ -19,19 +29,41 @@ public class Tank extends GameObject {
         this.rightImage = new Image(getClass().getResource("/images/tankR.gif").toExternalForm());
     }
 
+    // ---------------------------------------
+    // getters and setters.
+    // ---------------------------------------
+    public double getHealth() {
+        return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
+    public double getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(double maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    // ---------------------------------------
+    // movement.
+    // ---------------------------------------
     public void move(double dx, double dy) {
         x += dx;
         y += dy;
     }
 
-    public void rotate(double angle) {
-        if(angle == 90) {
+    public void rotate(String direction) {
+        if(direction.equals(Constants.WEST.getStringValue())) {
             tankImage = leftImage;
-        } else if(angle == 180) {
+        } else if(direction.equals(Constants.SOUTH.getStringValue())) {
             tankImage = downImage;
-        } else if(angle == 270) {
+        } else if(direction.equals(Constants.EAST.getStringValue())) {
             tankImage = rightImage;
-        } else if(angle == 0) {
+        } else if(direction.equals(Constants.NORTH.getStringValue())) {
             tankImage = upImage;
         }
     }

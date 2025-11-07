@@ -29,6 +29,6 @@ public class PauseMenu {
 
         VBox layout = new VBox(20, resumeBtn, menuBtn, exitBtn);
         layout.setStyle("-fx-alignment: center; -fx-background-color: #222;");
-        return new Scene(layout, Constants.GAME_WIDTH.getValue(), Constants.GAME_HEIGHT.getValue());
+        return new Scene(layout, Constants.GAME_WIDTH.getIntValue(), Constants.GAME_HEIGHT.getIntValue());
     }
 }

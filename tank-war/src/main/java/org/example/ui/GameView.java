@@ -15,7 +15,7 @@ import javafx.scene.layout.StackPane;
 public class GameView {
     public static Scene getScene() {
         // settings up canvas.
-        Canvas canvas = new Canvas(Constants.GAME_WIDTH.getValue(), Constants.GAME_HEIGHT.getValue());
+        Canvas canvas = new Canvas(Constants.GAME_WIDTH.getIntValue(), Constants.GAME_HEIGHT.getIntValue());
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
         StackPane root = new StackPane(canvas);

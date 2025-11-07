@@ -7,6 +7,7 @@ import org.example.blueprints.Constants;
 import org.example.blueprints.GameObject;
 import org.example.entities.Tank;
 import org.example.input.InputHandler;
+import org.example.ui.HUD;
 
 import javafx.scene.canvas.GraphicsContext;
 
@@ -15,10 +16,12 @@ public class GameController {
     private final List<GameObject> objectsInGame = new ArrayList<>();
     private InputHandler inputHandler;
     private Tank player;
+    private HUD hud;
 
     public GameController(GraphicsContext context) {
         this.graphicsContext = context;
         this.player = new Tank(100, 100);
+        this.hud = new HUD(this.player);
         this.addObject(this.player);
     }
 
@@ -26,20 +29,20 @@ public class GameController {
 
         if (inputHandler != null) {
             if (inputHandler.isUp()) {
-                this.player.move(0, -Constants.NORMAL_SPEED.getValue() * deltaTime);
-                this.player.rotate(0);
+                this.player.move(0, -Constants.NORMAL_SPEED.getIntValue() * deltaTime);
+                this.player.rotate(Constants.NORTH.getStringValue());
             }
             if (inputHandler.isDown()) {
-                this.player.move(0, Constants.NORMAL_SPEED.getValue() * deltaTime);
-                this.player.rotate(180);
+                this.player.move(0, Constants.NORMAL_SPEED.getIntValue() * deltaTime);
+                this.player.rotate(Constants.SOUTH.getStringValue());
             }
             if (inputHandler.isLeft()) {
-                this.player.move(-Constants.NORMAL_SPEED.getValue() * deltaTime, 0);
-                this.player.rotate(90);
+                this.player.move(-Constants.NORMAL_SPEED.getIntValue() * deltaTime, 0);
+                this.player.rotate(Constants.WEST.getStringValue());
             }
             if (inputHandler.isRight()) {
-                this.player.move(Constants.NORMAL_SPEED.getValue() * deltaTime, 0);
-                this.player.rotate(270);
+                this.player.move(Constants.NORMAL_SPEED.getIntValue() * deltaTime, 0);
+                this.player.rotate(Constants.EAST.getStringValue());
             }
         }
 
@@ -56,11 +59,14 @@ public class GameController {
     }
 
     public void render() {
-        graphicsContext.clearRect(0, 0, Constants.GAME_WIDTH.getValue(), Constants.GAME_HEIGHT.getValue());
+        graphicsContext.clearRect(0, 0, Constants.GAME_WIDTH.getIntValue(), Constants.GAME_HEIGHT.getIntValue());
 
         for (GameObject obj : objectsInGame) {
             obj.render(graphicsContext);
         }
+
+        // render HUD.
+        hud.render(graphicsContext);
     }
 
     public void addObject(GameObject obj) {
