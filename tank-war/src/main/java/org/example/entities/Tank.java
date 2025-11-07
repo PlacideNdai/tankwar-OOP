@@ -16,6 +16,8 @@ public class Tank extends GameObject {
     public Tank(double x, double y) {
         this.x = x;
         this.y = y;
+        this.width = Constants.TANK_WIDTH.getIntValue();
+        this.height = Constants.TANK_HEIGHT.getIntValue();
         this.health = 100;
         this.maxHealth = 100;
 
@@ -73,6 +75,6 @@ public class Tank extends GameObject {
 
     @Override
     public void render(GraphicsContext graphicsContext) {
-        graphicsContext.drawImage(tankImage, x, y);
+        graphicsContext.drawImage(tankImage, x, y, width, height);
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.example.blueprints.Constants;
 import org.example.blueprints.GameObject;
 import org.example.entities.Tank;
+import org.example.entities.Wall;
 import org.example.input.InputHandler;
 import org.example.ui.HUD;
 
@@ -23,6 +24,14 @@ public class GameController {
         this.player = new Tank(100, 100);
         this.hud = new HUD(this.player);
         this.addObject(this.player);
+
+        // ----------------------------------------------
+        // tesing walls. DELETE AFTER TESTING.
+        // ----------------------------------------------
+        addObject(new Wall(400, 200));
+        addObject(new Wall(200, 400));
+        addObject(new Wall(400, 400));
+        addObject(new Wall(100, 100));
     }
 
     public void update(double deltaTime) {
