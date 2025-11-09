@@ -80,22 +80,14 @@ public class Tank extends GameObject {
         y = prevY;
     }
 
-    // ---------------------------------------
-    // Collision detection.
-    // ---------------------------------------
-    public boolean collidesWith(GameObject gameObject) {
-        return (x < gameObject.getX() + gameObject.getWidth() &&
-                x + width > gameObject.getX() &&
-                y < gameObject.getY() + gameObject.getHeight() &&
-                y + height > gameObject.getY());
-    }
-
     @Override
     public void update(double deltaTime) {
     }
 
     @Override
     public void render(GraphicsContext graphicsContext) {
-        graphicsContext.drawImage(tankImage, x, y, width, height);
+        // graphicsContext.drawImage(tankImage, this.x, this.y, this.width, this.height);
+        // graphicsContext.setStroke(Color.RED);
+        graphicsContext.strokeRect(x, y, this.width, this.height);
     }
 }

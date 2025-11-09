@@ -4,20 +4,17 @@ import org.example.blueprints.Constants;
 import org.example.blueprints.GameObject;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class Wall extends GameObject{
     private double x, y;
     private double width, height;
-    private Image wallImage;
 
     public Wall(double x, double y){
         this.x = x;
         this.y = y;
         this.width = Constants.WALL_WIDTH.getIntValue();
         this.height = Constants.WALL_HEIGHT.getIntValue();
-        this.wallImage = new Image(getClass().getResource("/images/wall.png").toExternalForm());
-
     }
 
 
@@ -29,7 +26,10 @@ public class Wall extends GameObject{
 
     @Override
     public void render(GraphicsContext graphicsContext) {
-        graphicsContext.drawImage(wallImage, x, y, width, height);
+        graphicsContext.setFill(Color.BROWN);
+        graphicsContext.setStroke(Color.RED);
+        graphicsContext.fillRect(x, y, this.width, this.height);
+        graphicsContext.strokeRect(x, y, this.width, this.height);
     }
     
 }

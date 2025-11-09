@@ -21,7 +21,7 @@ public class GameController {
 
     public GameController(GraphicsContext context) {
         this.graphicsContext = context;
-        this.player = new Tank(100, 100);
+        this.player = new Tank(500, 500);
         this.hud = new HUD(this.player);
         this.addObject(this.player);
 
@@ -55,8 +55,16 @@ public class GameController {
             }
         }
 
-        // check for collisions.
-        checkCollisions();
+       // ----------------------------------------------
+       // check for collisions.
+        for (GameObject obj : objectsInGame) {
+            if (obj instanceof Wall wall) {
+                if (player.collidesWith(wall)) {
+                    System.out.println("Collision detected!");
+                    player.undoMove();
+                }
+            }
+        }
 
         for (GameObject obj : objectsInGame) {
             obj.update(deltaTime);
@@ -89,14 +97,14 @@ public class GameController {
     // Collision detection.
     // ----------------------------------------------
 
-    public void checkCollisions() {
-        for (GameObject obj : objectsInGame) {
-            if (obj instanceof Wall wall) {
-                if (player.collidesWith(wall)) {
-                    System.out.println("Collision detected!");
-                    player.undoMove();
-                }
-            }
-        }
-    }
+    // public void checkCollisions() {
+    //     for (GameObject obj : objectsInGame) {
+    //         if (obj instanceof Wall wall) {
+    //             if (player.collidesWith(wall)) {
+    //                 System.out.println("Collision detected!");
+    //                 player.undoMove();
+    //             }
+    //         }
+    //     }
+    // }
 }

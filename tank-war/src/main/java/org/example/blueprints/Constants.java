@@ -15,7 +15,7 @@ public enum Constants {
     // ----------------------------------------------
     // tank constants.
     // ----------------------------------------------
-    TANK_HEIGHT(55), TANK_WIDTH(55),
+    TANK_HEIGHT(50), TANK_WIDTH(50),
 
 
 
