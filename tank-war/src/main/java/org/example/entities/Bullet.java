@@ -12,13 +12,16 @@ public class Bullet extends GameObject {
     private double width, height;
     private double speed;
     private Image bulletImage;
+    private String direction;
     private Image upBulletImage, downBulletImage, leftBulletImage, rightBulletImage;
 
-    public Bullet(double x, double y, double dx, double dy) {
+    public Bullet(double x, double y, double dx, double dy, String direction) {
         this.x = x;
         this.y = y;
         this.dx = dx;
         this.dy = dy;
+        this.direction = direction;
+
         this.width = Constants.BULLET_WIDTH.getIntValue();
         this.height = Constants.BULLET_HEIGHT.getIntValue();
         this.speed = Constants.BULLET_SPEED.getIntValue();
@@ -34,6 +37,24 @@ public class Bullet extends GameObject {
     public void update(double deltaTime) {
         x += dx * speed * deltaTime;
         y += dy *speed * deltaTime;
+
+        this.getBullImage(direction);
+    }
+
+    public Image getBullImage(String direction){
+        if(direction.equals(Constants.NORTH.getStringValue())){
+            return bulletImage = upBulletImage;
+        }
+        else if(direction.equals(Constants.SOUTH.getStringValue())){
+            return bulletImage = downBulletImage;
+        }
+        else if(direction.equals(Constants.EAST.getStringValue())){
+            return bulletImage = rightBulletImage;
+        }
+        else if(direction.equals(Constants.WEST.getStringValue())){
+            return bulletImage = leftBulletImage;
+        }
+        return null;
     }
 
     @Override

@@ -101,7 +101,7 @@ public class Tank extends GameObject {
                 break;
         }
 
-        return new Bullet(bx, by, dx, dy);
+        return new Bullet(bx, by, dx, dy, currentDirection);
     }
 
     public void undoMove() {

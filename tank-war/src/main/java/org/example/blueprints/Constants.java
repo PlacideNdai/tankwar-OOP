@@ -35,7 +35,7 @@ public enum Constants {
     // ----------------------------------------------
     // Bullet constants.
     // ----------------------------------------------
-    BULLET_HEIGHT(25), BULLET_WIDTH(25), BULLET_SPEED(100);
+    BULLET_HEIGHT(25), BULLET_WIDTH(25), BULLET_SPEED(300);
 
     private String name;
     private int value;
