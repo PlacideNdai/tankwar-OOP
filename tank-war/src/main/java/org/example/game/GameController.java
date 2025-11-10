@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.example.blueprints.Constants;
 import org.example.blueprints.GameObject;
+import org.example.entities.AutoTank;
 import org.example.entities.Tank;
 import org.example.entities.Wall;
 import org.example.input.InputHandler;
@@ -29,10 +30,12 @@ public class GameController {
         // ----------------------------------------------
         // tesing walls. DELETE AFTER TESTING.
         // ----------------------------------------------
-        addObject(new Wall(400, 200));
-        addObject(new Wall(200, 400));
-        addObject(new Wall(400, 400));
-        addObject(new Wall(100, 100));
+        // addObject(new Wall(400, 200));
+        // addObject(new Wall(200, 400));
+        // addObject(new Wall(400, 400));
+        // addObject(new Wall(100, 100));
+        addObject(new AutoTank());
+        addObject(new AutoTank());
     }
 
     public void update(double deltaTime) {

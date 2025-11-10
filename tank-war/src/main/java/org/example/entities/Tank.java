@@ -11,7 +11,6 @@ public class Tank extends GameObject {
     private Image upImage, downImage, leftImage, rightImage;
     private double health;
     private double maxHealth;
-    private double x, y;
     private double prevX, prevY;
     private String currentDirection = "north";
 
@@ -36,26 +35,7 @@ public class Tank extends GameObject {
     }
 
     // ---------------------------------------
-    // getters and setters.
-    // ---------------------------------------
-    public double getHealth() {
-        return health;
-    }
-
-    public void setHealth(double health) {
-        this.health = health;
-    }
-
-    public double getMaxHealth() {
-        return maxHealth;
-    }
-
-    public void setMaxHealth(double maxHealth) {
-        this.maxHealth = maxHealth;
-    }
-
-    // ---------------------------------------
-    // movement.
+    // PLAYER FUNCTIONS.
     // ---------------------------------------
     public void move(double dx, double dy) {
         prevX = x;
@@ -81,10 +61,10 @@ public class Tank extends GameObject {
         }
     }
 
-    public Bullet shoot(){
-        double bx = x + width /2;
-        double by = y + height /2;
-        double dx =0, dy = 0;
+    public Bullet shoot() {
+        double bx = x + width / 2;
+        double by = y + height / 2;
+        double dx = 0, dy = 0;
 
         switch (currentDirection) {
             case "north":
@@ -117,5 +97,24 @@ public class Tank extends GameObject {
     public void render(GraphicsContext graphicsContext) {
         graphicsContext.drawImage(tankImage, this.x, this.y, this.width, this.height);
         graphicsContext.strokeRect(x, y, this.width, this.height);
+    }
+
+    // ---------------------------------------
+    // getters and setters.
+    // ---------------------------------------
+    public double getHealth() {
+        return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
+    public double getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(double maxHealth) {
+        this.maxHealth = maxHealth;
     }
 }
