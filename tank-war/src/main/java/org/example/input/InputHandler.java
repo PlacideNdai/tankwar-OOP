@@ -8,12 +8,12 @@ public class InputHandler {
     public void attach(Scene scene) {
         scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
-                case W -> up = true;
-                case S -> down = true;
-                case A -> left = true;
-                case D -> right = true;
-                case SPACE -> shoot = true;
-                default -> {}
+                case W: up = true;
+                case S: down = true;
+                case A: left = true;
+                case D: right = true;
+                case SPACE: shoot = true;
+                default: {};
             }
         });
 

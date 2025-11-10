@@ -13,15 +13,10 @@ public abstract class GameObject {
     public abstract void render(GraphicsContext graphicsContext);
 
     public boolean collidesWith(GameObject gameObject) {
-        double halfW = width / 2;
-        double halfH = height / 2;
-        double otherHalfW = gameObject.getWidth() / 2;
-        double otherHalfH = gameObject.getHeight() / 2;
-
-        return (x - halfW < gameObject.getX() + otherHalfW &&
-                x + halfW > gameObject.getX() - otherHalfW &&
-                y - halfH < gameObject.getY() + otherHalfH &&
-                y + halfH > gameObject.getY() - otherHalfH);
+        return (x < gameObject.getX() + gameObject.getWidth() &&
+                x + width > gameObject.getX() &&
+                y < gameObject.getY() + gameObject.getHeight() &&
+                y + height > gameObject.getY());
     }
 
     public void setPosition(double x, double y) {

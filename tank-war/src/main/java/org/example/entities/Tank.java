@@ -11,7 +11,9 @@ public class Tank extends GameObject {
     private Image upImage, downImage, leftImage, rightImage;
     private double health;
     private double maxHealth;
+    private double x, y;
     private double prevX, prevY;
+    private String currentDirection = "north";
 
     public Tank(double x, double y) {
         this.x = x;
@@ -66,13 +68,40 @@ public class Tank extends GameObject {
     public void rotate(String direction) {
         if (direction.equals(Constants.WEST.getStringValue())) {
             tankImage = leftImage;
+            this.currentDirection = Constants.WEST.getStringValue();
         } else if (direction.equals(Constants.SOUTH.getStringValue())) {
             tankImage = downImage;
+            this.currentDirection = Constants.SOUTH.getStringValue();
         } else if (direction.equals(Constants.EAST.getStringValue())) {
             tankImage = rightImage;
+            this.currentDirection = Constants.EAST.getStringValue();
         } else if (direction.equals(Constants.NORTH.getStringValue())) {
             tankImage = upImage;
+            this.currentDirection = Constants.NORTH.getStringValue();
         }
+    }
+
+    public Bullet shoot(){
+        double bx = x + width /2;
+        double by = y + height /2;
+        double dx =0, dy = 0;
+
+        switch (currentDirection) {
+            case "north":
+                dy = -1;
+                break;
+            case "south":
+                dy = 1;
+                break;
+            case "west":
+                dx = -1;
+                break;
+            case "east":
+                dx = 1;
+                break;
+        }
+
+        return new Bullet(bx, by, dx, dy);
     }
 
     public void undoMove() {
@@ -86,8 +115,7 @@ public class Tank extends GameObject {
 
     @Override
     public void render(GraphicsContext graphicsContext) {
-        // graphicsContext.drawImage(tankImage, this.x, this.y, this.width, this.height);
-        // graphicsContext.setStroke(Color.RED);
+        graphicsContext.drawImage(tankImage, this.x, this.y, this.width, this.height);
         graphicsContext.strokeRect(x, y, this.width, this.height);
     }
 }

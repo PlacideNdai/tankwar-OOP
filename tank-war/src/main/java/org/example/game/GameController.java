@@ -18,6 +18,7 @@ public class GameController {
     private InputHandler inputHandler;
     private Tank player;
     private HUD hud;
+    private double shootingCooldown = 0;
 
     public GameController(GraphicsContext context) {
         this.graphicsContext = context;
@@ -53,10 +54,20 @@ public class GameController {
                 this.player.move(Constants.NORMAL_SPEED.getIntValue() * deltaTime, 0);
                 this.player.rotate(Constants.EAST.getStringValue());
             }
+
+            // ----------------------------------------------
+            // shooting.
+            // ----------------------------------------------
+            shootingCooldown -= deltaTime;
+            if (inputHandler.isShoot() && shootingCooldown <= 0) {
+                addObject(this.player.shoot());
+                shootingCooldown = 0.8;
+            }
         }
 
-       // ----------------------------------------------
-       // check for collisions.
+        // ----------------------------------------------
+        // collisions.
+        // ----------------------------------------------
         for (GameObject obj : objectsInGame) {
             if (obj instanceof Wall wall) {
                 if (player.collidesWith(wall)) {
@@ -98,13 +109,13 @@ public class GameController {
     // ----------------------------------------------
 
     // public void checkCollisions() {
-    //     for (GameObject obj : objectsInGame) {
-    //         if (obj instanceof Wall wall) {
-    //             if (player.collidesWith(wall)) {
-    //                 System.out.println("Collision detected!");
-    //                 player.undoMove();
-    //             }
-    //         }
-    //     }
+    // for (GameObject obj : objectsInGame) {
+    // if (obj instanceof Wall wall) {
+    // if (player.collidesWith(wall)) {
+    // System.out.println("Collision detected!");
+    // player.undoMove();
+    // }
+    // }
+    // }
     // }
 }

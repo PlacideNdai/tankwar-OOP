@@ -29,7 +29,13 @@ public enum Constants {
     // ----------------------------------------------
     // Wall constants.
     // ----------------------------------------------
-    WALL_HEIGHT(50), WALL_WIDTH(50);
+    WALL_HEIGHT(50), WALL_WIDTH(50),
+
+
+    // ----------------------------------------------
+    // Bullet constants.
+    // ----------------------------------------------
+    BULLET_HEIGHT(25), BULLET_WIDTH(25), BULLET_SPEED(100);
 
     private String name;
     private int value;
