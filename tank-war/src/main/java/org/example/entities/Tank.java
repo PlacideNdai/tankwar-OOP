@@ -18,9 +18,6 @@ public class Tank extends GameObject {
         this.x = x;
         this.y = y;
 
-        this.width = Constants.TANK_WIDTH.getIntValue();
-        this.height = Constants.TANK_HEIGHT.getIntValue();
-
         this.health = 100;
         this.maxHealth = 100;
 
@@ -32,6 +29,9 @@ public class Tank extends GameObject {
         this.downImage = new Image(getClass().getResource("/images/tankD.gif").toExternalForm());
         this.leftImage = new Image(getClass().getResource("/images/tankL.gif").toExternalForm());
         this.rightImage = new Image(getClass().getResource("/images/tankR.gif").toExternalForm());
+
+        this.width = tankImage.getWidth();
+        this.height = tankImage.getHeight();
     }
 
     // ---------------------------------------
@@ -95,8 +95,8 @@ public class Tank extends GameObject {
 
     @Override
     public void render(GraphicsContext graphicsContext) {
-        graphicsContext.drawImage(tankImage, this.x, this.y, this.width, this.height);
-        graphicsContext.strokeRect(x, y, this.width, this.height);
+        graphicsContext.drawImage(tankImage, this.x, this.y, width, height);
+        graphicsContext.strokeRect(x, y, width, height);
     }
 
     // ---------------------------------------

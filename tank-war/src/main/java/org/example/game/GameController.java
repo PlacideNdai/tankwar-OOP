@@ -30,10 +30,13 @@ public class GameController {
         // ----------------------------------------------
         // tesing walls. DELETE AFTER TESTING.
         // ----------------------------------------------
-        // addObject(new Wall(400, 200));
-        // addObject(new Wall(200, 400));
-        // addObject(new Wall(400, 400));
-        // addObject(new Wall(100, 100));
+        addObject(new Wall(400, 200));
+        addObject(new Wall(200, 400));
+        addObject(new Wall(400, 400));
+        addObject(new Wall(100, 100));
+        addObject(new AutoTank().shoot());
+        addObject(new AutoTank());
+        addObject(new AutoTank());
         addObject(new AutoTank());
         addObject(new AutoTank());
     }
@@ -68,20 +71,28 @@ public class GameController {
             }
         }
 
+        for (GameObject obj : objectsInGame) {
+            obj.update(deltaTime);
+        }
+
         // ----------------------------------------------
         // collisions.
         // ----------------------------------------------
         for (GameObject obj : objectsInGame) {
-            if (obj instanceof Wall wall) {
-                if (player.collidesWith(wall)) {
-                    System.out.println("Collision detected!");
-                    player.undoMove();
-                }
-            }
-        }
 
-        for (GameObject obj : objectsInGame) {
-            obj.update(deltaTime);
+            if (obj == player) {
+                continue;
+            }
+
+            // player collides with wall.
+            if (player.collidesWith(obj)) {
+                player.undoMove();
+            }
+
+            // wall collides with player.
+            if (obj.collidesWith(player)) {
+                player.undoMove();
+            }
         }
     }
 
@@ -92,6 +103,9 @@ public class GameController {
         this.inputHandler = inputHandler;
     }
 
+    // ----------------------------------------------
+    // Rendering.
+    // ----------------------------------------------
     public void render() {
         graphicsContext.clearRect(0, 0, Constants.GAME_WIDTH.getIntValue(), Constants.GAME_HEIGHT.getIntValue());
 
@@ -106,19 +120,4 @@ public class GameController {
     public void addObject(GameObject obj) {
         objectsInGame.add(obj);
     }
-
-    // ----------------------------------------------
-    // Collision detection.
-    // ----------------------------------------------
-
-    // public void checkCollisions() {
-    // for (GameObject obj : objectsInGame) {
-    // if (obj instanceof Wall wall) {
-    // if (player.collidesWith(wall)) {
-    // System.out.println("Collision detected!");
-    // player.undoMove();
-    // }
-    // }
-    // }
-    // }
 }

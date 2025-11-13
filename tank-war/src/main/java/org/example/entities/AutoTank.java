@@ -50,23 +50,41 @@ public class AutoTank extends Tank {
 
         // move.
         move(dx * 100 * deltaTime, dy * 100 * deltaTime);
+
+        // stay in defined bounds.
+        inBounds();
+
+        // randomly shoot.
+        if (random.nextInt(100) == 0) {
+            shoot();
+        }
     }
 
     public void inBounds() {
         if (x < 0) {
             x = 0;
             dx = 1;
+            rotate("east");
         } else if (x + width > Constants.GAME_WIDTH.getIntValue()) {
             x = Constants.GAME_WIDTH.getIntValue() - width;
             dx = -1;
+            rotate("west");
         }
 
         if (y < 0) {
             y = 0;
             dy = 1;
+            rotate("south");
         } else if (y + height > Constants.GAME_HEIGHT.getIntValue()) {
             y = Constants.GAME_HEIGHT.getIntValue() - height;
             dy = -1;
+            rotate("north");
         }
     }
+
+    // @Override
+    // public void undoMove() {
+    //     super.undoMove();
+    //     moveTimer = 0;
+    // }
 }

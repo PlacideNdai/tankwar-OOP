@@ -7,8 +7,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class Wall extends GameObject{
-    private double x, y;
-    private double width, height;
 
     public Wall(double x, double y){
         this.x = x;
