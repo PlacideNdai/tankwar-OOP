@@ -1,6 +1,5 @@
 package org.example.entities;
 
-
 import org.example.blueprints.Constants;
 import org.example.blueprints.GameObject;
 
@@ -8,22 +7,20 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Bullet extends GameObject {
-    private double x, y, dx, dy;
-    private double width, height;
+    private double dx, dy;
     private double speed;
     private Image bulletImage;
     private String direction;
+    private Tank owner;
     private Image upBulletImage, downBulletImage, leftBulletImage, rightBulletImage;
 
-    public Bullet(double x, double y, double dx, double dy, String direction) {
+    public Bullet(double x, double y, double dx, double dy, String direction, Tank owner) {
         this.x = x;
         this.y = y;
         this.dx = dx;
         this.dy = dy;
         this.direction = direction;
-
-        this.width = Constants.BULLET_WIDTH.getIntValue();
-        this.height = Constants.BULLET_HEIGHT.getIntValue();
+        this.owner = owner;
         this.speed = Constants.BULLET_SPEED.getIntValue();
 
         this.bulletImage = new Image(getClass().getResource("/images/missileD.gif").toString());
@@ -31,36 +28,42 @@ public class Bullet extends GameObject {
         this.downBulletImage = new Image(getClass().getResource("/images/missileD.gif").toString());
         this.leftBulletImage = new Image(getClass().getResource("/images/missileL.gif").toString());
         this.rightBulletImage = new Image(getClass().getResource("/images/missileR.gif").toString());
+
+        this.width = this.bulletImage.getWidth();
+        this.height = this.bulletImage.getHeight();
     }
 
     @Override
     public void update(double deltaTime) {
         x += dx * speed * deltaTime;
-        y += dy *speed * deltaTime;
+        y += dy * speed * deltaTime;
 
         this.getBullImage(direction);
     }
 
-    public Image getBullImage(String direction){
-        if(direction.equals(Constants.NORTH.getStringValue())){
-            return bulletImage = upBulletImage;
+    @Override
+    public void onCollide(GameObject otherObj) {
+        if (otherObj instanceof Tank tank && tank != this.owner) {
+            System.out.println("Tank hit!");
         }
-        else if(direction.equals(Constants.SOUTH.getStringValue())){
-            return bulletImage = downBulletImage;
-        }
-        else if(direction.equals(Constants.EAST.getStringValue())){
-            return bulletImage = rightBulletImage;
-        }
-        else if(direction.equals(Constants.WEST.getStringValue())){
-            return bulletImage = leftBulletImage;
-        }
-        return null;
     }
 
     @Override
     public void render(GraphicsContext graphicsContext) {
         graphicsContext.drawImage(bulletImage, x, y, width, height);
     }
-    
-    
+
+    public Image getBullImage(String direction) {
+        if (direction.equals(Constants.NORTH.getStringValue())) {
+            return bulletImage = upBulletImage;
+        } else if (direction.equals(Constants.SOUTH.getStringValue())) {
+            return bulletImage = downBulletImage;
+        } else if (direction.equals(Constants.EAST.getStringValue())) {
+            return bulletImage = rightBulletImage;
+        } else if (direction.equals(Constants.WEST.getStringValue())) {
+            return bulletImage = leftBulletImage;
+        }
+        return null;
+    }
+
 }

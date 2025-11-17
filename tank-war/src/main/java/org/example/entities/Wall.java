@@ -15,7 +15,10 @@ public class Wall extends GameObject{
         this.height = Constants.WALL_HEIGHT.getIntValue();
     }
 
-
+    @Override
+    public void onCollide(GameObject otherObj){
+        
+    }
 
     @Override
     public void update(double deltaTime) {

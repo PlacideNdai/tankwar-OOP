@@ -34,7 +34,7 @@ public class GameController {
         addObject(new Wall(200, 400));
         addObject(new Wall(400, 400));
         addObject(new Wall(100, 100));
-        addObject(new AutoTank().shoot());
+        addObject(new AutoTank());
         addObject(new AutoTank());
         addObject(new AutoTank());
         addObject(new AutoTank());
@@ -78,21 +78,24 @@ public class GameController {
         // ----------------------------------------------
         // collisions.
         // ----------------------------------------------
-        for (GameObject obj : objectsInGame) {
+        for (GameObject objA : objectsInGame) {
 
-            if (obj == player) {
-                continue;
+            // // bullet collides with player.
+            // if( obj instanceof Bullet bullet){
+            //     if (bullet.collidesWith(obj)){
+            //         System.out.println("player hit");
+            //     }
+            // }
+
+            for( GameObject objB : objectsInGame){
+                if (objA == objB) continue;
+
+                if(objA.collidesWith(objB)){
+                    objA.onCollide(objB);
+                    objB.onCollide(objA);
+                }
             }
 
-            // player collides with wall.
-            if (player.collidesWith(obj)) {
-                player.undoMove();
-            }
-
-            // wall collides with player.
-            if (obj.collidesWith(player)) {
-                player.undoMove();
-            }
         }
     }
 

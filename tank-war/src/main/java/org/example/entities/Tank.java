@@ -45,6 +45,50 @@ public class Tank extends GameObject {
         y += dy;
     }
 
+    @Override
+    public void onCollide(GameObject otherObj){
+        if(otherObj instanceof Wall wall){
+            this.undoMove();
+        }
+
+        if(otherObj instanceof Bullet bullet){
+            System.out.println("Got hit, take cover!");
+        }
+
+        if(otherObj instanceof Tank tank){
+            tank.undoMove();
+        }
+    }
+
+    @Override
+    public void update(double deltaTime) {
+    }
+
+    @Override
+    public void render(GraphicsContext graphicsContext) {
+        graphicsContext.drawImage(tankImage, this.x, this.y, width, height);
+        graphicsContext.strokeRect(x, y, width, height);
+    }
+
+    // ---------------------------------------
+    // GETTERS, SETTERS, AND MORE.
+    // ---------------------------------------
+    public double getHealth() {
+        return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
+    public double getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(double maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
     public void rotate(String direction) {
         if (direction.equals(Constants.WEST.getStringValue())) {
             tankImage = leftImage;
@@ -81,40 +125,11 @@ public class Tank extends GameObject {
                 break;
         }
 
-        return new Bullet(bx, by, dx, dy, currentDirection);
+        return new Bullet(bx, by, dx, dy, currentDirection, this);
     }
 
     public void undoMove() {
         x = prevX;
         y = prevY;
-    }
-
-    @Override
-    public void update(double deltaTime) {
-    }
-
-    @Override
-    public void render(GraphicsContext graphicsContext) {
-        graphicsContext.drawImage(tankImage, this.x, this.y, width, height);
-        graphicsContext.strokeRect(x, y, width, height);
-    }
-
-    // ---------------------------------------
-    // getters and setters.
-    // ---------------------------------------
-    public double getHealth() {
-        return health;
-    }
-
-    public void setHealth(double health) {
-        this.health = health;
-    }
-
-    public double getMaxHealth() {
-        return maxHealth;
-    }
-
-    public void setMaxHealth(double maxHealth) {
-        this.maxHealth = maxHealth;
     }
 }

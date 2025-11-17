@@ -81,10 +81,4 @@ public class AutoTank extends Tank {
             rotate("north");
         }
     }
-
-    // @Override
-    // public void undoMove() {
-    //     super.undoMove();
-    //     moveTimer = 0;
-    // }
 }

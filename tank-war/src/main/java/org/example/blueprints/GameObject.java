@@ -19,6 +19,8 @@ public abstract class GameObject {
                 y + height > gameObject.getY());
     }
 
+    public abstract void onCollide(GameObject obj);
+
     public void setPosition(double x, double y) {
         this.x = x;
         this.y = y;
