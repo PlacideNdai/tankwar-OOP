@@ -7,6 +7,7 @@ public abstract class GameObject {
     protected double x, y;
     protected double width, height;
     protected ImageView sprite;
+    protected boolean isAlive = true;
 
     public abstract void update(double deltaTime);
 
@@ -21,9 +22,12 @@ public abstract class GameObject {
 
     public abstract void onCollide(GameObject obj);
 
-    public void setPosition(double x, double y) {
-        this.x = x;
-        this.y = y;
+    public void destroy(){
+        isAlive = false;
+    }
+
+    public boolean isAlive(){
+        return isAlive;
     }
 
     public double getWidth() {

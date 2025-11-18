@@ -52,7 +52,7 @@ public class Tank extends GameObject {
         }
 
         if(otherObj instanceof Bullet bullet){
-            System.out.println("Got hit, take cover!");
+            this.destroy();
         }
 
         if(otherObj instanceof Tank tank){

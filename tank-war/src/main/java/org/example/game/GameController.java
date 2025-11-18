@@ -2,6 +2,7 @@ package org.example.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.example.blueprints.Constants;
 import org.example.blueprints.GameObject;
@@ -79,14 +80,6 @@ public class GameController {
         // collisions.
         // ----------------------------------------------
         for (GameObject objA : objectsInGame) {
-
-            // // bullet collides with player.
-            // if( obj instanceof Bullet bullet){
-            //     if (bullet.collidesWith(obj)){
-            //         System.out.println("player hit");
-            //     }
-            // }
-
             for( GameObject objB : objectsInGame){
                 if (objA == objB) continue;
 
@@ -95,8 +88,9 @@ public class GameController {
                     objB.onCollide(objA);
                 }
             }
-
         }
+
+        objectsInGame.removeIf(Predicate.not(GameObject::isAlive));
     }
 
     // ----------------------------------------------
