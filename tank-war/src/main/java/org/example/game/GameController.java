@@ -72,6 +72,22 @@ public class GameController {
             }
         }
 
+        // ----------------------------------------------
+        // update objects.
+        // ----------------------------------------------
+        List<GameObject> newObjects = new ArrayList<>();
+        for (GameObject obj : objectsInGame) {
+            if (obj instanceof AutoTank auto) {
+                if (auto.readyToShoot(deltaTime)) {
+                    // temp store.
+                    newObjects.add(auto.shoot());
+                }
+            }
+        }
+
+        // adding when its ready.
+        objectsInGame.addAll(newObjects);
+
         for (GameObject obj : objectsInGame) {
             obj.update(deltaTime);
         }
@@ -80,10 +96,11 @@ public class GameController {
         // collisions.
         // ----------------------------------------------
         for (GameObject objA : objectsInGame) {
-            for( GameObject objB : objectsInGame){
-                if (objA == objB) continue;
+            for (GameObject objB : objectsInGame) {
+                if (objA == objB)
+                    continue;
 
-                if(objA.collidesWith(objB)){
+                if (objA.collidesWith(objB)) {
                     objA.onCollide(objB);
                     objB.onCollide(objA);
                 }
@@ -91,6 +108,14 @@ public class GameController {
         }
 
         objectsInGame.removeIf(Predicate.not(GameObject::isAlive));
+
+        // ----------------------------------------------
+        // Handle player death.
+        // ----------------------------------------------
+        if (player.isAlive() == false) {
+            this.player = new Tank(500, 500);
+            this.addObject(this.player);
+        }
     }
 
     // ----------------------------------------------

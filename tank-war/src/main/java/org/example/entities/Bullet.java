@@ -45,7 +45,7 @@ public class Bullet extends GameObject {
 
     @Override
     public void onCollide(GameObject otherObj) {
-        if (otherObj instanceof Tank tank && tank != owner) {
+        if (otherObj instanceof Tank tank && tank != getOwner()) {
             this.destroy();
         }
 
