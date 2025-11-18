@@ -10,6 +10,7 @@ public class AutoTank extends Tank {
     private double directionDuration = 2;
     private double dx = 0;
     private double dy = 0;
+    private double untilNextRound = 0.4;
 
     public AutoTank() {
         super(new Random().nextInt(800), new Random().nextInt(600));
@@ -54,9 +55,12 @@ public class AutoTank extends Tank {
         // stay in defined bounds.
         inBounds();
 
-        // randomly shoot.
-        if (random.nextInt(100) == 0) {
+        // shooting.
+        untilNextRound -= deltaTime;
+
+        if(untilNextRound <= 0){
             shoot();
+            untilNextRound = 0.8;
         }
     }
 
@@ -81,4 +85,5 @@ public class AutoTank extends Tank {
             rotate("north");
         }
     }
+
 }

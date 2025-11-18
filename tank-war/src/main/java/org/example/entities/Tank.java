@@ -9,17 +9,12 @@ import javafx.scene.image.Image;
 public class Tank extends GameObject {
     private Image tankImage;
     private Image upImage, downImage, leftImage, rightImage;
-    private double health;
-    private double maxHealth;
     private double prevX, prevY;
     private String currentDirection = "north";
 
     public Tank(double x, double y) {
         this.x = x;
         this.y = y;
-
-        this.health = 100;
-        this.maxHealth = 100;
 
         // --------------------------------------------------------------------------------------------
         // Tank Images
@@ -46,16 +41,18 @@ public class Tank extends GameObject {
     }
 
     @Override
-    public void onCollide(GameObject otherObj){
-        if(otherObj instanceof Wall wall){
+    public void onCollide(GameObject otherObj) {
+        if (otherObj instanceof Wall wall) {
             this.undoMove();
         }
 
-        if(otherObj instanceof Bullet bullet){
-            this.destroy();
+        if (otherObj instanceof Bullet bullet) {
+            if (bullet.getOwner() != this) {
+                this.destroy();
+            }
         }
 
-        if(otherObj instanceof Tank tank){
+        if (otherObj instanceof Tank tank) {
             tank.undoMove();
         }
     }
@@ -73,22 +70,6 @@ public class Tank extends GameObject {
     // ---------------------------------------
     // GETTERS, SETTERS, AND MORE.
     // ---------------------------------------
-    public double getHealth() {
-        return health;
-    }
-
-    public void setHealth(double health) {
-        this.health = health;
-    }
-
-    public double getMaxHealth() {
-        return maxHealth;
-    }
-
-    public void setMaxHealth(double maxHealth) {
-        this.maxHealth = maxHealth;
-    }
-
     public void rotate(String direction) {
         if (direction.equals(Constants.WEST.getStringValue())) {
             tankImage = leftImage;
@@ -113,9 +94,11 @@ public class Tank extends GameObject {
         switch (currentDirection) {
             case "north":
                 dy = -1;
+                by = y - 20;
                 break;
             case "south":
                 dy = 1;
+                by = y + height + 20;
                 break;
             case "west":
                 dx = -1;

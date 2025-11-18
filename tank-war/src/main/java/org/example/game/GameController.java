@@ -68,7 +68,7 @@ public class GameController {
             shootingCooldown -= deltaTime;
             if (inputHandler.isShoot() && shootingCooldown <= 0) {
                 addObject(this.player.shoot());
-                shootingCooldown = 0.4;
+                shootingCooldown = 0.2;
             }
         }
 

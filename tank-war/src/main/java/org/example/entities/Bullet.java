@@ -39,12 +39,18 @@ public class Bullet extends GameObject {
         y += dy * speed * deltaTime;
 
         this.getBullImage(direction);
+
+        inBounds();
     }
 
     @Override
     public void onCollide(GameObject otherObj) {
-        if (otherObj instanceof Tank tank && tank != this.owner) {
-            destroy();
+        if (otherObj instanceof Tank tank && tank != owner) {
+            this.destroy();
+        }
+
+        if (otherObj instanceof Wall wall) {
+            this.destroy();
         }
     }
 
@@ -66,4 +72,21 @@ public class Bullet extends GameObject {
         return null;
     }
 
+    public Tank getOwner() {
+        return owner;
+    }
+
+    public void inBounds() {
+        if (x < 0) {
+            this.destroy();
+        } else if (x + width > Constants.GAME_WIDTH.getIntValue()) {
+            this.destroy();
+        }
+
+        if (y < 0) {
+            this.destroy();
+        } else if (y + height > Constants.GAME_HEIGHT.getIntValue()) {
+            this.destroy();
+        }
+    }
 }
