@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import org.example.blueprints.Constants;
+import org.example.blueprints.Createfactory;
 import org.example.blueprints.GameObject;
 import org.example.entities.AutoTank;
 import org.example.entities.Heals;
 import org.example.entities.Tank;
-import org.example.entities.Wall;
 import org.example.input.InputHandler;
 import org.example.ui.HUD;
 
@@ -32,15 +32,20 @@ public class GameController {
         // ----------------------------------------------
         // tesing walls. DELETE AFTER TESTING.
         // ----------------------------------------------
-        addObject(new Wall(400, 200));
-        addObject(new Wall(200, 400));
-        addObject(new Wall(400, 400));
-        addObject(new Wall(100, 100));
-        addObject(new AutoTank());
-        addObject(new AutoTank());
-        addObject(new AutoTank());
-        addObject(new AutoTank());
-        addObject(new AutoTank());
+        spawn(new WallFactory(200, 200));
+        spawn(new WallFactory(250, 200));
+        spawn(new WallFactory(300, 200));
+        spawn(new WallFactory(350, 200));
+        spawn(new WallFactory(400, 200));
+
+        spawn(new WallFactory(400, 400));
+        spawn(new WallFactory(400, 450));
+        spawn(new WallFactory(400, 500));
+
+        
+        for(int a =0; a < 10; a++){
+            spawn(new TankFactory());
+        }
 
         for( int a =0; a < 10; a++){
             addObject(new Heals());
@@ -148,5 +153,9 @@ public class GameController {
 
     public void addObject(GameObject obj) {
         objectsInGame.add(obj);
+    }
+
+    public void spawn(Createfactory factory){
+        addObject(factory.create());
     }
 }

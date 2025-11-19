@@ -28,9 +28,7 @@ public class Wall extends GameObject{
     @Override
     public void render(GraphicsContext graphicsContext) {
         graphicsContext.setFill(Color.BROWN);
-        graphicsContext.setStroke(Color.RED);
         graphicsContext.fillRect(x, y, this.width, this.height);
-        graphicsContext.strokeRect(x, y, this.width, this.height);
     }
     
 }

@@ -13,6 +13,7 @@ public class Tank extends GameObject implements Life {
     private double prevX, prevY;
     private String currentDirection = "north";
     private int health;
+    private int points = 0;
 
     public Tank(double x, double y) {
         this.x = x;
@@ -56,8 +57,10 @@ public class Tank extends GameObject implements Life {
         if (otherObj instanceof Bullet bullet) {
             if (bullet.getOwner() != this && health > 0) {
                 takeDamage(20);
-            } else if(health <= 0){
+            } else if (health <= 0) {
                 this.destroy();
+                bullet.destroy();
+                bullet.getOwner().gainPoint();
             }
         }
 
@@ -65,7 +68,7 @@ public class Tank extends GameObject implements Life {
             tank.undoMove();
         }
 
-        if(otherObj instanceof Heals heals){
+        if (otherObj instanceof Heals heals) {
             heals.destroy();
             this.heal();
         }
@@ -157,5 +160,13 @@ public class Tank extends GameObject implements Life {
     @Override
     public int getHealth() {
         return health;
+    }
+
+    public void gainPoint() {
+        points += 1;
+    }
+
+    public int getPoints(){
+        return points;
     }
 }
