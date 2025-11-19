@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import org.example.blueprints.Constants;
 import org.example.blueprints.GameObject;
 import org.example.entities.AutoTank;
+import org.example.entities.Heals;
 import org.example.entities.Tank;
 import org.example.entities.Wall;
 import org.example.input.InputHandler;
@@ -40,6 +41,10 @@ public class GameController {
         addObject(new AutoTank());
         addObject(new AutoTank());
         addObject(new AutoTank());
+
+        for( int a =0; a < 10; a++){
+            addObject(new Heals());
+        }
     }
 
     public void update(double deltaTime) {

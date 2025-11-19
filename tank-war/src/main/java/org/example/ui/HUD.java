@@ -18,7 +18,5 @@ public class HUD {
         graphicsContext.fillRect(10, 10, 200, 30);
 
         graphicsContext.setFill(Color.RED);
-        // double healthWidth = 200 * player.getHealth() / player.getMaxHealth();
-        // graphicsContext.fillRect(10, 10, healthWidth, 0);
     }
 }

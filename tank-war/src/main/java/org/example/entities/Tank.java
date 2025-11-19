@@ -2,15 +2,17 @@ package org.example.entities;
 
 import org.example.blueprints.Constants;
 import org.example.blueprints.GameObject;
+import org.example.blueprints.Life;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Tank extends GameObject {
+public class Tank extends GameObject implements Life {
     private Image tankImage;
     private Image upImage, downImage, leftImage, rightImage;
     private double prevX, prevY;
     private String currentDirection = "north";
+    private int health;
 
     public Tank(double x, double y) {
         this.x = x;
@@ -27,6 +29,11 @@ public class Tank extends GameObject {
 
         this.width = tankImage.getWidth();
         this.height = tankImage.getHeight();
+
+        // ----------------------------------
+        // health.
+        // ----------------------------------
+        this.health = 100;
     }
 
     // ---------------------------------------
@@ -47,13 +54,20 @@ public class Tank extends GameObject {
         }
 
         if (otherObj instanceof Bullet bullet) {
-            if (bullet.getOwner() != this) {
+            if (bullet.getOwner() != this && health > 0) {
+                takeDamage(20);
+            } else if(health <= 0){
                 this.destroy();
             }
         }
 
         if (otherObj instanceof Tank tank) {
             tank.undoMove();
+        }
+
+        if(otherObj instanceof Heals heals){
+            heals.destroy();
+            this.heal();
         }
     }
 
@@ -63,6 +77,17 @@ public class Tank extends GameObject {
 
     @Override
     public void render(GraphicsContext graphicsContext) {
+        double barWidth = width;
+        double barHeight = 10;
+        double barX = x;
+        double barY = y + barHeight - 25;
+
+        double healthPercent = (double) health / 100;
+        double healthFill = barWidth * healthPercent;
+
+        graphicsContext.setFill(javafx.scene.paint.Color.DARKRED);
+        graphicsContext.fillRect(barX, barY, healthFill, barHeight);
+
         graphicsContext.drawImage(tankImage, this.x, this.y, width, height);
         graphicsContext.strokeRect(x, y, width, height);
     }
@@ -114,5 +139,23 @@ public class Tank extends GameObject {
     public void undoMove() {
         x = prevX;
         y = prevY;
+    }
+
+    // ---------------------------------------
+    // from LIFE.
+    // ---------------------------------------
+    @Override
+    public void takeDamage(int damage) {
+        health -= damage;
+    }
+
+    @Override
+    public void heal() {
+        health = 100;
+    }
+
+    @Override
+    public int getHealth() {
+        return health;
     }
 }
