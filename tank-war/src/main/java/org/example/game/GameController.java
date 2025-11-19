@@ -89,7 +89,9 @@ public class GameController {
         objectsInGame.addAll(newObjects);
 
         for (GameObject obj : objectsInGame) {
-            obj.update(deltaTime);
+            if (obj.isAlive()) {
+                obj.update(deltaTime);
+            }
         }
 
         // ----------------------------------------------

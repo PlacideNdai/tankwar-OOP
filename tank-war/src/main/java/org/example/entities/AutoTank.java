@@ -10,6 +10,7 @@ public class AutoTank extends Tank {
     private double directionDuration = 2;
     private double dx = 0;
     private double dy = 0;
+    private double shootCooldown = 0.4;
 
     public AutoTank() {
         super(new Random().nextInt(800), new Random().nextInt(600));
@@ -80,8 +81,6 @@ public class AutoTank extends Tank {
             rotate("north");
         }
     }
-
-    private double shootCooldown = 0.4;
 
     // ----------------------------------------------
     // Shooting.
