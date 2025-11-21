@@ -42,12 +42,11 @@ public class GameController {
         spawn(new WallFactory(400, 450));
         spawn(new WallFactory(400, 500));
 
-        
-        for(int a =0; a < 10; a++){
+        for (int a = 0; a < 10; a++) {
             spawn(new TankFactory());
         }
 
-        for( int a =0; a < 10; a++){
+        for (int a = 0; a < 10; a++) {
             addObject(new Heals());
         }
     }
@@ -55,22 +54,27 @@ public class GameController {
     public void update(double deltaTime) {
 
         if (inputHandler != null) {
-            if (inputHandler.isUp()) {
-                this.player.move(0, -Constants.NORMAL_SPEED.getIntValue() * deltaTime);
-                this.player.rotate(Constants.NORTH.getStringValue());
-            }
-            if (inputHandler.isDown()) {
-                this.player.move(0, Constants.NORMAL_SPEED.getIntValue() * deltaTime);
-                this.player.rotate(Constants.SOUTH.getStringValue());
-            }
+            double speed = Constants.NORMAL_SPEED.getIntValue() * deltaTime;
+
+            // Handle X-axis movement
             if (inputHandler.isLeft()) {
-                this.player.move(-Constants.NORMAL_SPEED.getIntValue() * deltaTime, 0);
+                this.player.move(-speed, 0);
                 this.player.rotate(Constants.WEST.getStringValue());
-            }
-            if (inputHandler.isRight()) {
-                this.player.move(Constants.NORMAL_SPEED.getIntValue() * deltaTime, 0);
+            } else if (inputHandler.isRight()) {
+                this.player.move(speed, 0);
                 this.player.rotate(Constants.EAST.getStringValue());
             }
+            handleCollisions();
+
+            // Handle Y-axis movement
+            if (inputHandler.isUp()) {
+                this.player.move(0, -speed);
+                this.player.rotate(Constants.NORTH.getStringValue());
+            } else if (inputHandler.isDown()) {
+                this.player.move(0, speed);
+                this.player.rotate(Constants.SOUTH.getStringValue());
+            }
+            handleCollisions();
 
             // ----------------------------------------------
             // shooting.
@@ -107,6 +111,10 @@ public class GameController {
         // ----------------------------------------------
         // collisions.
         // ----------------------------------------------
+        handleCollisions();
+    }
+
+    private void handleCollisions() {
         for (GameObject objA : objectsInGame) {
             for (GameObject objB : objectsInGame) {
                 if (objA == objB)
@@ -155,7 +163,7 @@ public class GameController {
         objectsInGame.add(obj);
     }
 
-    public void spawn(Createfactory factory){
+    public void spawn(Createfactory factory) {
         addObject(factory.create());
     }
 }
