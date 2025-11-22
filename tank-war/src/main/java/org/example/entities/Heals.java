@@ -34,7 +34,7 @@ public class Heals extends GameObject {
             this.destroy();
         }
 
-        if (obj instanceof Wall wall) {
+        if (obj instanceof Wall) {
             this.destroy();
         }
     }

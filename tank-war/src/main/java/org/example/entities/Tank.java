@@ -50,7 +50,7 @@ public class Tank extends GameObject implements Life {
 
     @Override
     public void onCollide(GameObject otherObj) {
-        if (otherObj instanceof Wall wall) {
+        if (otherObj instanceof Wall) {
             this.undoMove();
         }
 

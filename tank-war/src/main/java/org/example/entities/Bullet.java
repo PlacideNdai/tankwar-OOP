@@ -49,7 +49,7 @@ public class Bullet extends GameObject {
             this.destroy();
         }
 
-        if (otherObj instanceof Wall wall) {
+        if (otherObj instanceof Wall) {
             this.destroy();
         }
     }
