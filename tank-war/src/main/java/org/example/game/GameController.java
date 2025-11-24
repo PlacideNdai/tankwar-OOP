@@ -22,11 +22,12 @@ public class GameController {
     private Tank player;
     private HUD hud;
     private double shootingCooldown = 0;
+    private long numberOfAutoTanks = 0;
+    private long numberOfhelps = 0;
 
     public GameController(GraphicsContext context) {
         this.graphicsContext = context;
         this.player = new Tank(500, 500);
-        this.hud = new HUD(this.player);
         this.addObject(this.player);
 
         // ----------------------------------------------
@@ -42,12 +43,15 @@ public class GameController {
         spawn(new WallFactory(400, 450));
         spawn(new WallFactory(400, 500));
 
+        // spawning auto tanks and heals.
         for (int a = 0; a < 10; a++) {
             spawn(new TankFactory());
+            numberOfAutoTanks++;
         }
 
         for (int a = 0; a < 10; a++) {
             addObject(new Heals());
+            numberOfhelps++;
         }
     }
 
@@ -99,9 +103,14 @@ public class GameController {
             }
         }
 
+        // ----------------------------------------------
         // adding when its ready.
+        // ----------------------------------------------
         objectsInGame.addAll(newObjects);
 
+        // ----------------------------------------------
+        // updating objects.
+        // ----------------------------------------------
         for (GameObject obj : objectsInGame) {
             if (obj.isAlive()) {
                 obj.update(deltaTime);
@@ -112,6 +121,20 @@ public class GameController {
         // collisions.
         // ----------------------------------------------
         handleCollisions();
+
+        // ----------------------------------------------
+        // handle respawn.
+        // ----------------------------------------------
+        numberOfAutoTanks = objectsInGame.stream().filter(ob -> ob instanceof AutoTank).count();
+        numberOfhelps = objectsInGame.stream().filter(ob -> ob instanceof Heals).count();
+
+        if (numberOfAutoTanks < 10) {
+            spawn(new TankFactory());
+        }
+
+        if (numberOfhelps < 10) {
+            addObject(new Heals());
+        }
     }
 
     private void handleCollisions() {

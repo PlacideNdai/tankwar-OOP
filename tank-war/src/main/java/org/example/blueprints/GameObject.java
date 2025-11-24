@@ -30,6 +30,10 @@ public abstract class GameObject {
         return isAlive;
     }
 
+    public void setIsAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
+
     public double getWidth() {
         return width;
     }

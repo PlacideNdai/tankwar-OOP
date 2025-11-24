@@ -3,6 +3,7 @@ package org.example.entities;
 import org.example.blueprints.Constants;
 import org.example.blueprints.GameObject;
 import org.example.blueprints.Life;
+import org.example.ui.HUD;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -14,11 +15,12 @@ public class Tank extends GameObject implements Life {
     private String currentDirection = "north";
     private int health;
     private int points = 0;
+    private HUD hub;
 
     public Tank(double x, double y) {
         this.x = x;
         this.y = y;
-
+        this.hub = new HUD(this);
         // --------------------------------------------------------------------------------------------
         // Tank Images
         // --------------------------------------------------------------------------------------------
