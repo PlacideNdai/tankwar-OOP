@@ -94,7 +94,6 @@ public class Tank extends GameObject implements Life {
         graphicsContext.fillRect(barX, barY, healthFill, barHeight);
 
         graphicsContext.drawImage(tankImage, this.x, this.y, width, height);
-        graphicsContext.strokeRect(x, y, width, height);
     }
 
     // ---------------------------------------
