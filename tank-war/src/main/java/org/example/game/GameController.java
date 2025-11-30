@@ -29,7 +29,7 @@ public class GameController {
         this.graphicsContext = context;
         this.player = new Tank(500, 500);
         this.addObject(this.player);
-
+        this.hud = new HUD(this.player);
         // ----------------------------------------------
         // tesing walls. DELETE AFTER TESTING.
         // ----------------------------------------------
@@ -178,7 +178,6 @@ public class GameController {
             obj.render(graphicsContext);
         }
 
-        // render HUD.
         hud.render(graphicsContext);
     }
 
