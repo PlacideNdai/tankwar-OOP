@@ -156,8 +156,14 @@ public class GameController {
         // Handle player death.
         // ----------------------------------------------
         if (player.isAlive() == false) {
+            // Save the player's points before creating a new tank
+            int currentPoints = this.player.getPoints();
             this.player = new Tank(500, 500);
+            // Restore the points
+            this.player.setPoints(currentPoints);
             this.addObject(this.player);
+            // Update HUD to reference the new player instance
+            this.hud = new HUD(this.player);
         }
     }
 

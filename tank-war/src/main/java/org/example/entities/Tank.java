@@ -56,10 +56,12 @@ public class Tank extends GameObject implements Life {
         if (otherObj instanceof Bullet bullet) {
             if (bullet.getOwner() != this && health > 0) {
                 takeDamage(20);
-            } else if (health <= 0) {
-                this.destroy();
-                bullet.destroy();
-                bullet.getOwner().gainPoint();
+                // Check if the damage killed this tank
+                if (health <= 0) {
+                    this.destroy();
+                    bullet.destroy();
+                    bullet.getOwner().gainPoint();
+                }
             }
         }
 
@@ -164,7 +166,11 @@ public class Tank extends GameObject implements Life {
         points += 1;
     }
 
-    public int getPoints(){
+    public int getPoints() {
         return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 }
